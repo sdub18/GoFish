@@ -278,7 +278,7 @@ char computer_play(struct player* target) {
     printf( "Player 2's turn, enter a Rank:");
     
     // get the rank from that hand
-    char rank = currHand->top.rank[0];
+    char rank = currHand->top.rank[1];
     
     if (rank == 1) {
         printf("10\n");

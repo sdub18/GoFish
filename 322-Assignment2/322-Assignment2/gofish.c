@@ -62,8 +62,9 @@ int main(int args, char* argv[]) {
                     printHandWithRank(&computer, rank);
                     printf("    -Player 1 has ");
                     printHandWithRank(&user, rank);
+                    transfer_cards(&computer, &user, rank);
                 } else {
-                    if (rank == 1) {
+                    if (rank == '1') {
                         printf("    -Player 2 has no 10's \n");
                     } else {
                         printf("    -Player 2 has no %c's \n", rank);
@@ -71,7 +72,11 @@ int main(int args, char* argv[]) {
                     
                     // Draw a card for player
                     card *drawnCard = next_card();
-                    printf("    -Go Fish, Player 1 draws %s%c\n", drawnCard->rank, drawnCard->suit);
+                    if (drawnCard->rank[1] == '1') {
+                        printf("    -Go Fish, Player 1 draws 10%c\n", drawnCard->suit);
+                    } else {
+                        printf("    -Go Fish, Player 1 draws %c%c\n", drawnCard->rank[1], drawnCard->suit);
+                    }
                     add_card(&user, drawnCard);
                 }
                 
@@ -101,6 +106,7 @@ int main(int args, char* argv[]) {
                     printHandWithRank(&user, rank);
                     printf("    -Player 2 has ");
                     printHandWithRank(&computer, rank);
+                    transfer_cards(&user, &computer, rank);
                 } else {
                     if (rank == 1) {
                         printf("    -Player 1 has no 10's \n");
@@ -216,7 +222,7 @@ void printBook(player *target) {
     int index = 0;
     while (target->book[index] != 0) {
         if (target->book[index] == 1) {
-            printf("10 ");
+            printf("10");
         } else {
             printf("%c", target->book[index]);
         }
@@ -230,7 +236,12 @@ void printHandWithRank(player *target, char rank) {
     
     while (currentHand != NULL) {
         if (currentHand->top.rank[1] == rank) {
-            printf("%s%c, ", currentHand->top.rank, currentHand->top.suit);
+            if (currentHand->top.rank[1] == '1') {
+                printf("10");
+            } else {
+                printf("%c", currentHand->top.rank[1]);
+            }
+            printf("%c, ", currentHand->top.suit);
         }
         currentHand = currentHand->next;
     }
