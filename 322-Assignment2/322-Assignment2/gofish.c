@@ -48,7 +48,7 @@ int main(int args, char* argv[]) {
             
             // Print Player Two's Books:
             printf("Player 2's Book - ");
-            printBook(&user);
+            printBook(&computer);
             
             if (currentPlayersTurn == 0) {
                 // MARK: Player One's Turn
@@ -121,12 +121,12 @@ int main(int args, char* argv[]) {
                 }
                 
                 // Check if book can be formed
-                char book = check_add_book(&computer);
-                if (book != 0) {
-                    if (book == 1) {
+                char book2 = check_add_book(&computer);
+                if (book2 != 0) {
+                    if (book2 == 1) {
                         printf("    -Player 2 books 10\n");
                     } else {
-                        printf("    -Player 2 books %c\n", book);
+                        printf("    -Player 2 books %c\n", book2);
                     }
                     
                     // Keep turn
@@ -196,6 +196,7 @@ int main(int args, char* argv[]) {
             } else {
                 printf("Exiting. \n");
                 userPlaying = 0;
+                return 0;
             }
         }
     }
@@ -221,11 +222,12 @@ void printHand(player *target) {
 void printBook(player *target) {
     int index = 0;
     while (target->book[index] != 0) {
-        if (target->book[index] == 1) {
+        if (target->book[index] == '1') {
             printf("10");
         } else {
             printf("%c", target->book[index]);
         }
+        printf(" ");
         index ++;
     }
     printf("\n");

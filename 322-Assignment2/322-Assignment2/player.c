@@ -188,13 +188,14 @@ int transfer_cards(struct player* src, struct player* dest, char rank) {
     }
     
     // Cycle through number of cards of source
-    hand *currSrcHand = src->card_list;
+    hand* currSrcHand = src->card_list;
     int tally = 0;
     
-    while (currSrcHand->next != NULL) {
-        if (currSrcHand->top.rank[0] == rank) {
-            remove_card(dest, &currSrcHand->top);
-            add_card(src, &currSrcHand->top);
+    while (currSrcHand!= NULL) {
+        char tempRank = currSrcHand->top.rank[1];
+        if ( tempRank == rank) {
+            remove_card(src, &currSrcHand->top);
+            add_card(dest, &currSrcHand->top);
             tally ++;
         }
         currSrcHand = currSrcHand->next;
@@ -276,6 +277,9 @@ char computer_play(struct player* target) {
     }
     
     printf( "Player 2's turn, enter a Rank:");
+    if(currHand==NULL){
+        currHand=target->card_list;
+    }
     
     // get the rank from that hand
     char rank = currHand->top.rank[1];
