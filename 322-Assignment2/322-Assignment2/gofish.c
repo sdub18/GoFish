@@ -78,6 +78,10 @@ int main(int args, char* argv[]) {
                         printf("    -Go Fish, Player 1 draws %c%c\n", drawnCard->rank[1], drawnCard->suit);
                     }
                     add_card(&user, drawnCard);
+                    if(drawnCard->rank[1] == rank){
+                        printf("Player 1 Drew the card they asked for! They get another turn");
+                        bookCreated = 1;
+                    }
                 }
                 
                 // Check if book is possible:
@@ -118,6 +122,10 @@ int main(int args, char* argv[]) {
                     card *drawnCard = next_card();
                     printf("    -Go Fish, Player 2 draws a card\n");
                     add_card(&computer, drawnCard);
+                    if(drawnCard->rank[1] == rank){
+                        printf("Player 2 Drew the card they asked for! They get another turn");
+                        bookCreated = 1;
+                    }
                 }
                 
                 // Check if book can be formed
