@@ -191,7 +191,7 @@ int transfer_cards(struct player* src, struct player* dest, char rank) {
     hand* currSrcHand = src->card_list;
     int tally = 0;
     
-    while (currSrcHand!= NULL) {
+    while (currSrcHand != NULL) {
         char tempRank = currSrcHand->top.rank[1];
         if ( tempRank == rank) {
             remove_card(src, &currSrcHand->top);
