@@ -83,7 +83,7 @@ int main(int args, char* argv[]) {
                 // Check if book is possible:
                 char book = check_add_book(&user);
                 if (book != 0) {
-                    if (book == 1) {
+                    if (book == '1') {
                         printf("    -Player 1 books 10\n");
                     } else {
                         printf("    -Player 1 books %c\n", book);
@@ -108,7 +108,7 @@ int main(int args, char* argv[]) {
                     printHandWithRank(&computer, rank);
                     transfer_cards(&user, &computer, rank);
                 } else {
-                    if (rank == 1) {
+                    if (rank == '1') {
                         printf("    -Player 1 has no 10's \n");
                     } else {
                         printf("    -Player 1 has no %c's \n", rank);
@@ -123,7 +123,7 @@ int main(int args, char* argv[]) {
                 // Check if book can be formed
                 char book2 = check_add_book(&computer);
                 if (book2 != 0) {
-                    if (book2 == 1) {
+                    if (book2 == '1') {
                         printf("    -Player 2 books 10\n");
                     } else {
                         printf("    -Player 2 books %c\n", book2);
@@ -160,43 +160,42 @@ int main(int args, char* argv[]) {
                 }
             }
         }
-        return 0;
-    }
-    
-    // MARK: Game has ended
-    // Determine if the user wants to exit the game
-    
-    int didEnterValidInput = 1;
-    char userInput[100];
-    char response;
-    
-    // Ensure a proper response from scanf
-    while (didEnterValidInput == 0) {
-        printf( "\nDo you want to play again [Y|N]:");
-        int validScan = scanf("%s", userInput);
-        printf("\n");
         
-        if (validScan != 1) {
-            printf("Error - must reply with either Y or N \n");
-            continue;
-        }
+        // MARK: Game has ended
+        // Determine if the user wants to exit the game
         
-        response = userInput[0];
+        int didEnterValidInput = 0;
+        char userInput[100];
+        char response;
         
-        if (response != 'Y' && response != 'N' && response != 'y' && response != 'n') {
-            printf("Error - must reply with either Y or N \n");
-            continue;
-        } else {
-            didEnterValidInput = 1;
+        // Ensure a proper response from scanf
+        while (didEnterValidInput == 0) {
+            printf( "\nDo you want to play again [Y|N]:");
+            int validScan = scanf("%s", userInput);
+            printf("\n");
             
-            // handle response
-            if (response == 'Y' || response == 'y') {
-                // Nothing to do
+            if (validScan != 1) {
+                printf("Error - must reply with either Y or N \n");
+                continue;
+            }
+            
+            response = userInput[0];
+            
+            if (response != 'Y' && response != 'N' && response != 'y' && response != 'n') {
+                printf("Error - must reply with either Y or N \n");
                 continue;
             } else {
-                printf("Exiting. \n");
-                userPlaying = 0;
-                return 0;
+                didEnterValidInput = 1;
+                
+                // handle response
+                if (response == 'Y' || response == 'y') {
+                    // Nothing to do
+                    continue;
+                } else {
+                    printf("Exiting. \n");
+                    userPlaying = 0;
+                    return 0;
+                }
             }
         }
     }
