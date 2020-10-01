@@ -256,5 +256,5 @@ int getSizeOfBook(player *target) {
         index ++;
     }
     
-    return index + 1;
+    return index;
 }
